@@ -6,6 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import FaceIcon from '@material-ui/icons/Face';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
+import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Cell, Pie, PieChart } from 'recharts';
@@ -29,8 +31,10 @@ const styles = theme => ({
   heroName: {
     paddingTop: 20,
   },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4,
+  summary: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
   },
   layout: {
     width: 'auto',
@@ -45,6 +49,9 @@ const styles = theme => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6,
+  },
+  grow: {
+    flexGrow: 1,
   },
 });
 
@@ -109,9 +116,11 @@ function Resume(props) {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <FaceIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-            karlieann.com
+          <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
+            Karlie Verkest
           </Typography>
+          <Button color="inherit">github</Button>
+        <Button color="inherit">linkedin</Button>
         </Toolbar>
       </AppBar>
       <main>
@@ -119,14 +128,26 @@ function Resume(props) {
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
             <Grid container spacing={24}>
-              <Grid item xs={12} sm={7}>
-                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom className={classes.heroName}>
-                  Karlie Verkest
-                </Typography>
-                <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                  human-focused engineering manager
-                </Typography>
-              </Grid>
+              <Hidden xsDown>
+                <Grid item sm={7}>
+                  <Typography component="h1" variant="h2" color="textPrimary" gutterBottom className={classes.heroName}>
+                    Karlie Verkest
+                  </Typography>
+                  <Typography variant="h6" color="textSecondary" paragraph>
+                    human-focused engineering manager
+                  </Typography>
+                </Grid>
+              </Hidden>
+              <Hidden smUp>
+                <Grid item xs={12}>
+                  <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom className={classes.heroName}>
+                    Karlie Verkest
+                  </Typography>
+                  <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                    human-focused engineering manager
+                  </Typography>
+                </Grid>
+              </Hidden>
               <Grid item xs={12} sm={5}>
                 <PieChart width={260} height={90}>
                   <Pie
@@ -169,20 +190,21 @@ function Resume(props) {
                 </PieChart>
               </Grid>
             </Grid>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={16} justify="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                <div>
+                  <Paper className={classes.summary} elevation={1}>
+                    <Typography variant="h5" component="h3">
+                      Professional Goals
+                    </Typography>
+                    <Typography variant="body1" component="p">
+                      I want to work with excellent engineers who don't need my technical help. I want to work for a leadership team that sees their human team members as their most valuable resource. I want to work in an organization that shares my values, does social good, and has a real impact.
+                    </Typography>
+                  </Paper>
+                </div>
               </Grid>
-            </div>
+            </Grid>
+
           </div>
         </div>
       </main>
